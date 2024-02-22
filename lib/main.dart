@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'SecondScreen.dart'; // Импортируйте SecondScreen.dart
+import 'RedPage.dart';
+import 'YellowPage.dart';
+import 'package:srs_4/BluePage.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Color Navigation Demo',
       home: HomePage(),
     );
   }
@@ -20,20 +19,36 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Главный экран'),
-      ),
+      appBar: AppBar(title: Text('Home Page')),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () async {
-            final result = await Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SecondScreen(data: 'Данные с главного экрана')),
-            );
-            // Используйте полученные данные
-            print("Результат: $result");
-          },
-          child: Text('Перейти к следующему экрану'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.red)),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => RedPage()),
+              ),
+              child: Text('Red Page'),
+            ),
+            ElevatedButton(
+              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.yellow)),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => YellowPage()),
+              ),
+              child: Text('Yellow Page'),
+            ),
+            ElevatedButton(
+              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.blue)),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => BluePage()),
+              ),
+              child: Text('Blue Page'),
+            ),
+          ],
         ),
       ),
     );
